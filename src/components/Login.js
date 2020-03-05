@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { connect, useSelector } from "react-redux";
 
-function SignUpForm({ touched, errors, status, isSubmitting, values }) {
+// LOGIN ACTIONS
+import { login } from "../actions/loginAction";
+
+function LoginForm({ touched, errors, status, isSubmitting, values }) {
     console.log("This is our status", status);
     
     const [users, setUsers] = useState({});
@@ -15,7 +19,7 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
 
 
     return (
-        <div className="SignUp-form">
+        <div className="Login-form">
         <Form>
             <label>
             <Field type="name" name="name" placeholder="UserName" />
@@ -24,12 +28,6 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
             )}
             </label>
 
-            <label>
-        <Field type="email" name="email" placeholder="Email" />
-        {touched.email && errors.email && (
-            <p className="errors">{errors.email}</p>
-            )}
-        </label>
         <label>
         <Field type="password" name="password" placeholder="Password" />
         {touched.password && errors.password && (
@@ -38,12 +36,11 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
         </label>
 
         
-        <button type= "submit" disabled={isSubmitting}>SignUp!</button>
+        <button type= "submit" disabled={isSubmitting}>Login!</button>
         </Form>
 
         {users.name && (
         <ul key={users.id}>
-        <li>Name: {users.name}</li>
         <li>Email: {users.email}</li>
         <li>Password: {users.password}</li>
         </ul>
@@ -58,10 +55,9 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
     }
     
     const FormikWelcomeForm = withFormik({
-    mapPropsToValues({ email, password, name  }) {
+    mapPropsToValues({ password, name  }) {
         return {
             name: name || "",
-        email: email || "",
         password: password || "",
         
         };
@@ -70,10 +66,6 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
         name: Yup
             .string()
             .required("UserName is required"),
-        email: Yup
-            .string()
-            .email("Email not valid")
-            .required("Email is required"),
         password: Yup
             .string()
             .min(6, "Password must be 6 characters or longer")
@@ -83,23 +75,15 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
 
 
         }),
-        handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-               console.log("Submitting!")
-                axios
-                .post(" https://reqres.in/api/users", values)
-                .then(res => {
-                  console.log(res); // Data was created successfully and logs to console
-                    resetForm();
-                    setSubmitting(false);
-                })
-                .catch(err => {
-                  console.log(err); // There was an error creating the data and logs to console
-                    setSubmitting(false);
-                    setErrors();
-                });
-            
-            }
+        
+        handleSubmit(values, { props }) {
+            console.log("submitting", values, props);
+            props.login(values, props.history);
+          }
     })
-    (SignUpForm);
+    (LoginForm);
     
-    export default FormikWelcomeForm;
+    export default connect(
+        null,
+        { login }
+      )(FormikWelcomeForm);
