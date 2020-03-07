@@ -6,8 +6,7 @@ function App() {
     <div className="App">
   <NavLinks/>
       </div>
-   
-  
+    
   );
 }
 

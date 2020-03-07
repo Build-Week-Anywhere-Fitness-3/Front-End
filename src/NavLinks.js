@@ -18,10 +18,10 @@ const NavBurger = () => {
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <NavLink to="/Home"activeClassName="colors">Home</NavLink>
+              <a href="https://reverent-blackwell-dd535a.netlify.com/index.html"activeClassName="colors">Home</a>
             </NavItem>
             <NavItem>
-              <NavLink to="/About"activeClassName="colors"> About </NavLink>
+              <a href="https://reverent-blackwell-dd535a.netlify.com/about.html"activeClassName="colors"> About </a>
             </NavItem>
             <NavItem >
               <NavLink to="/Login" activeClassName="colors">Login</NavLink>
