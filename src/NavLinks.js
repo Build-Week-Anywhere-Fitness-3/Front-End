@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Route, Link } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem,} from 'reactstrap';
 import Login from './Login';
 import SignUp  from './SignUp';
 
-const NavLink = () => {
+const NavBurger = () => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
@@ -13,18 +13,21 @@ const NavLink = () => {
     <div className= "gymback">
     <div>
       <Navbar color="faded" dark>
-        <NavbarBrand href="/"  className="gym">AnyWhereFitness</NavbarBrand>
+        <NavbarBrand  className="gym">AnyWhereFitness</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="burger" />
         <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar >
+          <Nav navbar>
+            <NavItem>
+              <NavLink to="/Home"activeClassName="colors">Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/About"activeClassName="colors"> About </NavLink>
+            </NavItem>
             <NavItem >
-              <a href="About"> About </a>
+              <NavLink to="/Login" activeClassName="colors">Login</NavLink>
             </NavItem>
-            <NavItem>
-              <Link to="/Login">Login</Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/SignUp">SignUp</Link>
+            <NavItem >
+              <NavLink to="/SignUp" activeClassName="colors">SignUp</NavLink>
             </NavItem>
             
           </Nav>
@@ -59,4 +62,4 @@ const NavLink = () => {
   );
 }
 
-export default NavLink;
+export default NavBurger;

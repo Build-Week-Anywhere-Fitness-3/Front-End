@@ -40,8 +40,8 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
            Client or Instructor?: 
           <Field component="select" className="GymRole" name="Role">
             <option>Choose an Option</option>
-            <option value="herbivore">Client</option>
-            <option value="carnivore">Instructor</option>
+            <option value="client">Client</option>
+            <option value="instructor">Instructor</option>
            
           </Field>
         </label>
