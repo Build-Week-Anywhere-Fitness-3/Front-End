@@ -4,15 +4,15 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 
-function LoginForm({ touched, errors, status, isSubmitting, values }) {
+function LoginForm({ touched, errors, status, isSubmitting, values, }) {
     console.log("This is our status", status);
     
     const [users, setUsers] = useState({});
 
+
     useEffect(() => {
         status && setUsers(status);
     }, [status]);
-
 
 
     return (
@@ -75,22 +75,24 @@ function LoginForm({ touched, errors, status, isSubmitting, values }) {
 
 
         }),
-        handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
+        handleSubmit(values, { resetForm, setErrors, setSubmitting, }) {
                 console.log("Submitting!")
                 axios
-                .post(" https://reqres.in/api/users", values)
+                .post("https://reqres.in/api/users", values)
                 .then(res => {
-                  console.log(res); // Data was created successfully and logs to console
+                    console.log(res)
                     resetForm();
+                    
                     setSubmitting(false);
+                    
                 })
                 .catch(err => {
-                  console.log(err); // There was an error creating the data and logs to console
+                    console.log(err); 
                     setSubmitting(false);
                     setErrors();
                 });
             
-            }
+            },
     })
     (LoginForm);
     

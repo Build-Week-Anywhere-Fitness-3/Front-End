@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Route, NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem,} from 'reactstrap';
+import WorkOut from './WorkOut';
 import Login from './Login';
 import SignUp  from './SignUp';
 
@@ -18,10 +19,10 @@ const NavBurger = () => {
         <Collapse isOpen={!collapsed} navbar>
           <Nav navbar>
             <NavItem>
-              <a href="https://reverent-blackwell-dd535a.netlify.com/index.html"activeClassName="colors">Home</a>
+              <a href="https://reverent-blackwell-dd535a.netlify.com/index.html">Home</a>
             </NavItem>
             <NavItem>
-              <a href="https://reverent-blackwell-dd535a.netlify.com/about.html"activeClassName="colors"> About </a>
+              <a href="https://reverent-blackwell-dd535a.netlify.com/about.html"> About </a>
             </NavItem>
             <NavItem >
               <NavLink to="/Login" activeClassName="colors">Login</NavLink>
@@ -29,7 +30,9 @@ const NavBurger = () => {
             <NavItem >
               <NavLink to="/SignUp" activeClassName="colors">SignUp</NavLink>
             </NavItem>
-            
+            <NavItem >
+              <NavLink to="/HallOfFame" activeClassName="colors">Hall of fame</NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
@@ -47,18 +50,24 @@ const NavBurger = () => {
 
       <Route path = "/Login"
     component={Login}
-    render= {routeProps => {
-      console.log('routeProps', routeProps);
-    }}
+
     />
  <Route path = "/SignUp"
     component={SignUp}
-    render= {routeProps => {
-      console.log('routeProps', routeProps);
-    }}
+    
+    
+    />
+    <Route path = "/HallOfFame"
+    component={WorkOut}
+     render= {routeProps => {
+       console.log("routeProps", routeProps);
+     }}
     />
     </div>
+
     </div>
+
+    
   );
 }
 
