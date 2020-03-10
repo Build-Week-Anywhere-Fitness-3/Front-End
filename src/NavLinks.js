@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Route, Link } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem,} from 'reactstrap';
+import WorkOut from './WorkOut';
 import Login from './Login';
 import SignUp  from './SignUp';
 
-const NavLink = () => {
+const NavBurger = () => {
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
@@ -13,20 +14,25 @@ const NavLink = () => {
     <div className= "gymback">
     <div>
       <Navbar color="faded" dark>
-        <NavbarBrand href="/"  className="gym">AnyWhereFitness</NavbarBrand>
+        <NavbarBrand  className="gym">AnyWhereFitness</NavbarBrand>
         <NavbarToggler onClick={toggleNavbar} className="burger" />
         <Collapse isOpen={!collapsed} navbar>
-          <Nav navbar >
+          <Nav navbar>
+            <NavItem>
+              <a href="https://reverent-blackwell-dd535a.netlify.com/index.html">Home</a>
+            </NavItem>
+            <NavItem>
+              <a href="https://reverent-blackwell-dd535a.netlify.com/about.html"> About </a>
+            </NavItem>
             <NavItem >
-              <a href="About"> About </a>
+              <NavLink to="/Login" activeClassName="colors">Login</NavLink>
             </NavItem>
-            <NavItem>
-              <Link to="/Login">Login</Link>
+            <NavItem >
+              <NavLink to="/SignUp" activeClassName="colors">SignUp</NavLink>
             </NavItem>
-            <NavItem>
-              <Link to="/SignUp">SignUp</Link>
+            <NavItem >
+              <NavLink to="/HallOfFame" activeClassName="colors">Hall of fame</NavLink>
             </NavItem>
-            
           </Nav>
         </Collapse>
       </Navbar>
@@ -44,19 +50,25 @@ const NavLink = () => {
 
       <Route path = "/Login"
     component={Login}
-    render= {routeProps => {
-      console.log('routeProps', routeProps);
-    }}
+
     />
  <Route path = "/SignUp"
     component={SignUp}
-    render= {routeProps => {
-      console.log('routeProps', routeProps);
-    }}
+    
+    
+    />
+    <Route path = "/HallOfFame"
+    component={WorkOut}
+     render= {routeProps => {
+       console.log("routeProps", routeProps);
+     }}
     />
     </div>
+
     </div>
+
+    
   );
 }
 
-export default NavLink;
+export default NavBurger;

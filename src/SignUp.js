@@ -37,13 +37,13 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
             )}
         </label>
         <label>
-           Client or Instructor?: 
-          <Field component="select" className="GymRole" name="Role">
+            Client or Instructor?: 
+            <Field component="select" className="GymRole" name="Role">
             <option>Choose an Option</option>
-            <option value="herbivore">Client</option>
-            <option value="carnivore">Instructor</option>
-           
-          </Field>
+            <option value="client">Client</option>
+            <option value="instructor">Instructor</option>
+            
+            </Field>
         </label>
 
 
@@ -79,10 +79,9 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
     }
     
     const FormikWelcomeForm = withFormik({
-    mapPropsToValues({ email, password, name  }) {
+    mapPropsToValues({ password, name  }) {
         return {
             name: name || "",
-        email: email || "",
         password: password || "",
         
         };
@@ -91,10 +90,6 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
         name: Yup
             .string()
             .required("UserName is required"),
-        email: Yup
-            .string()
-            .email("Email not valid")
-            .required("Email is required"),
         password: Yup
             .string()
             .min(6, "Password must be 6 characters or longer")
@@ -105,16 +100,16 @@ function SignUpForm({ touched, errors, status, isSubmitting, values }) {
 
         }),
         handleSubmit(values, { resetForm, setErrors, setSubmitting }) {
-               console.log("Submitting!")
+                console.log("Submitting!")
                 axios
                 .post(" https://reqres.in/api/users", values)
                 .then(res => {
-                  console.log(res); // Data was created successfully and logs to console
+                  console.log(res); 
                     resetForm();
                     setSubmitting(false);
                 })
                 .catch(err => {
-                  console.log(err); // There was an error creating the data and logs to console
+                  console.log(err); 
                     setSubmitting(false);
                     setErrors();
                 });

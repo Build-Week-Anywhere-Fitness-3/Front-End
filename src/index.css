@@ -351,7 +351,19 @@ code {
   background-image: url(./GymPic/gym.jpg);
   width: 100%;
   height: 50%;
-  padding-bottom: 30rem;
+  padding-bottom: 50rem;
   
 }
 
+.colors{
+  color:#fff
+}
+
+
+ul{
+  color: #38a6f0;
+}
+
+h1{
+  color: #7b92a8;
+}
